@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BlogCards from "../Components/BlogCards";
@@ -11,28 +12,30 @@ const BlogListPage = (props) => {
       axios
       .get(`${process.env.REACT_APP_BACKEND}/blogs/all`)
       .then(res=>{
-        // console.log(res.data)
-        setBlogList(res.data)
+        setBlogList(res.data.blogs)
       })
       .catch(function (error) {
         console.log(`Client Error Point 2: ` + error);
       })
     }
-
       useEffect(() => {
         pullData()
   }, []);
 
-  console.log(blogList)
+  // console.log(blogList)
 
   return (
     <div className="BlogListPage container">
       <h2 className="display-4 text-center">Here is your List of Blogs</h2>
-      <div>
-        {/* <BlogCards blogList={blogList} /> */}
+      <div className="card-group">
+        {blogList.map((blog, index)=>
+        <BlogCards 
+        blog={blog} 
+        key={index} />
+        )}
       </div>
     </div>
-  );
+  )
 };
 
 export default BlogListPage;

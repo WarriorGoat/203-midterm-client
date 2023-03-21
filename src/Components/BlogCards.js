@@ -1,51 +1,35 @@
 // import React from "react";
-import React, {useState, useEffect } from "react";
+import React, {useState } from "react";
 import { useNavigate  } from 'react-router-dom';
 import "./BlogCards.css";
+import axios from 'axios';
 
 // Blog Card
 const BlogCards = (props) => {
-  console.log(props)
+
   const [blogList, setBlogList] = useState(props)
+ 
   const navigate = useNavigate();
 
-  console.log(blogList)
-
-  // const [blogList, setBlogList] = useState(props);
-  // console.log(blogList)
-  
-  //   //load the blog items from the back end 
-  //   useEffect(() => {
-  //       axios.get(`${urlEndPoint}/blogs/all`)
-  //     .then(function (response) {
-  //       setBlogList(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(`Client Error Point 2: `+ error);
-  //     })
-  //   }, [blogList])
-
   const DeleteCard=(props)=>{
-      // axios.delete(`${urlEndPoint}/blogs/deleteOne/${props}`)
-      // .then(function (response) {
-      //   console.log(response);
-      //   const newList = axios.get(`${urlEndPoint}/blogs/all`)
-      //   // .then(function(res){
-      //     setBlogList(newList)
-      //     console.log(blogList)
-      //   // });
-      //   // navigate("/list")
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
+
+      axios.delete(`${process.env.REACT_APP_BACKEND}/blogs/deleteOne/${props}`)
+      .then(function (response) {
+        axios.get(`${process.env.REACT_APP_BACKEND}/blogs/all`)
+        .then(function(res){
+          setBlogList(res.data.blogs)
+          navigate("/list")
+        }) 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  const blogCards = blogList.map((blog) => {
-    
+  const blogCard = (props) => {
+    const blog=props.blog
     return (
-      <div className="card col" key={blog.id}>
-          <div className="card-block">
+      <div className="card-body" key={blog.id}>
             <h2 className="card-title text-center"><b>Title:  {blog.title}</b></h2>
             <ul className="list-group list-group-flush text-left">
               <li className="list-group-item"><b>Author:</b>  {blog.author}</li>
@@ -59,19 +43,17 @@ const BlogCards = (props) => {
               <button className="deleteCard" 
               onClick={()=>{
                 DeleteCard(blog.id)
-                // App()
                 
               }}
               >Delete Blog</button>
             </ul>
-        </div>
       </div>
     );
-  });
+  };
   return (
-    <div >
-      <div className="row align-items-start">{blogCards}</div>
-    </div>
+    <>
+      <div className="card">{blogCard(props)}</div>
+    </>
   );
 };
 

@@ -3,12 +3,10 @@ import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import "./BlogForm.css";
 // import App from "../App"
-const urlEndPoint = process.env.REACT_APP_BACKEND;
+
 
 
 const BlogFormPage = (props) => {
-	const urlEndPoint = props;
-	const [blogList, setBlogList] = useState (props);
     const [title, setTitle] = useState("");
 	const [author, setAuthor] = useState("");
 	const [text, setText] = useState("");
@@ -19,16 +17,14 @@ const BlogFormPage = (props) => {
 	
 
     const handleCreateBlog = async () => {
-        axios.post(`${urlEndPoint}/blogs/create-one`, {
+        axios.post(`${process.env.REACT_APP_BACKEND}/blogs/create-one`, {
             title: title,
             author: author,
             text: text,
 			categories: categories
           })
-          .then(function (response) {
-            console.log(response);
-			setBlogList(...blogList,blogList.push.response);
-			navigate("/list")
+          .then(function () {
+            navigate("/list")
           })
           .catch(function (error) {
             console.log(error);
@@ -74,6 +70,7 @@ const BlogFormPage = (props) => {
 			<br/>
 			<button onClick={()=>{
 				handleCreateBlog()
+				
 			}}>Create Blog: </button>
 		</form>
 	)
