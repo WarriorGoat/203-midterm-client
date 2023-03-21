@@ -1,0 +1,75 @@
+form {
+  display: block;
+  justify-content: left;
+  color: white;
+  text-shadow: 2px 2px rgb(92, 92, 92);
+  border: 20px;
+  padding: 15px;
+  margin: 15px;
+  max-width: 800px;
+}
+
+label {
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  display: block;
+}
+
+input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 25px;
+  border: 2px solid rgb(18, 24, 186);
+  box-sizing: border-box;
+}
+
+input[type="text"]:hover {
+  width: 50%;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 25px;
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 25px;
+  border: 2px solid rgb(18, 24, 186);
+  box-sizing: border-box;
+}
+
+textarea:hover {
+  width: 80%;
+  padding: 10px;
+  margin: 4px 0;
+  border-radius: 25px;
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  margin: 4px 0;
+  background-color: gray;
+  color: white;
+  border: 2px solid black;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+button:hover {
+  padding: 10px;
+  margin: 4px 0;
+  background-color: rgb(53, 52, 52);
+  color: white;
+  border: 2px solid red;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
